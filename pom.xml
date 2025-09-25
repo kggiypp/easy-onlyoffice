@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.kggiypp</groupId>
+    <artifactId>easy-onlyoffice</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>easy-onlyoffice</name>
+    <description>基于onlyoffice开源组件二次开发的一个简单易用的java门面端访问服务</description>
+    <url>https://github.com/kggiypp/easy-onlyoffice</url>
+    
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://github.com/kggiypp/easy-onlyoffice/blob/master/LICENSE</url>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <name>keguang</name>
+            <email>1249484629@qq.com</email>
+            <roles>
+                <role>Java Development Engineer</role>
+            </roles>
+            <timezone>8</timezone>
+        </developer>
+    </developers>
+    
+    <scm>
+        <connection>scm:git:https://github.com/kggiypp/easy-onlyoffice.git</connection>
+        <developerConnection>scm:git:https://github.com/kggiypp/easy-onlyoffice.git</developerConnection>
+        <url>https://github.com/kggiypp/easy-onlyoffice.git</url>
+    </scm>
+    
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/kggiypp/easy-onlyofficess/issues</url>
+    </issueManagement>
+    
+    <modules>
+        <module>easy-onlyoffice-server</module>
+        <module>easy-onlyoffice-sdk</module>
+        <module>easy-onlyoffice-spring-boot-autoconfigure</module>
+        <module>easy-onlyoffice-spring-boot-starter</module>
+    </modules>
+    
+    <properties>
+        <!-- maven绑定插件属性指定 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        
+        <!-- maven插件版本定义 -->
+        <compiler.plugin.version>3.1</compiler.plugin.version>
+        <source.plugin.version>3.2.0</source.plugin.version>
+        <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
+        <gpg.plugin.version>1.6</gpg.plugin.version>
+        <sonatype.plguin.version>0.4.0</sonatype.plguin.version>
+        
+        <!-- 项目依赖版本控制 -->
+        <spring-boot.version>2.2.13.RELEASE</spring-boot.version>
+        <docs-integration-sdk-version>1.4.0</docs-integration-sdk-version>
+    </properties>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.onlyoffice</groupId>
+                <artifactId>docs-integration-sdk</artifactId>
+                <version>${docs-integration-sdk-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.kggiypp</groupId>
+                <artifactId>easy-onlyoffice-sdk</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.kggiypp</groupId>
+                <artifactId>easy-onlyoffice-spring-boot-autoconfigure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${compiler.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${source.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${javadoc.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>${gpg.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonatype.central</groupId>
+                    <artifactId>central-publishing-maven-plugin</artifactId>
+                    <version>${sonatype.plguin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgument>-parameters</compilerArgument>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <profiles>
+        <profile>
+            <id>release</id>
+            <properties>
+                <skip.springboot.repackage>true</skip.springboot.repackage>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>aggregate-jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <tokenAuth>true</tokenAuth>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    
+</project>
