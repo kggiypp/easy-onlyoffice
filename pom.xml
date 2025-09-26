@@ -59,7 +59,7 @@
         <source.plugin.version>3.2.0</source.plugin.version>
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <gpg.plugin.version>1.6</gpg.plugin.version>
-        <sonatype.plguin.version>0.4.0</sonatype.plguin.version>
+        <sonatype.plguin.version>0.7.0</sonatype.plguin.version>
         
         <!-- 项目依赖版本控制 -->
         <spring-boot.version>2.2.13.RELEASE</spring-boot.version>
@@ -182,7 +182,6 @@
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
-                            <tokenAuth>true</tokenAuth>
                         </configuration>
                     </plugin>
                 </plugins>
