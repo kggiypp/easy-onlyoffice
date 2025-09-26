@@ -150,9 +150,6 @@
     <profiles>
         <profile>
             <id>release</id>
-            <properties>
-                <skip.springboot.repackage>true</skip.springboot.repackage>
-            </properties>
             <build>
                 <plugins>
                     <plugin>

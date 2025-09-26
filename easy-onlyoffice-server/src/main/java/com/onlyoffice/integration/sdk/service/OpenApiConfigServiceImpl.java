@@ -33,7 +33,7 @@ public class OpenApiConfigServiceImpl extends DefaultConfigService {
     public Config createConfig(String fileId, Mode mode, Type type) {
         FileInfo fileInfo = cacheFileMap.get(fileId);
         if (fileInfo == null) {
-            throw new RuntimeException("系统内部该缓存文件已失效，请重新请求获取编辑链接");
+            throw new RuntimeException("系统内部该缓存文件已失效，请重新发起获取编辑链接请求");
         }
         return super.createConfig(fileInfo.getInternalFileName(), mode, type);
     }

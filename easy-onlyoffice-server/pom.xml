@@ -118,11 +118,28 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<skip>${skip.springboot.repackage}</skip>
-				</configuration>
 				<version>2.5.1</version>
+				<executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+						<configuration>
+							<skip>${skip.springboot.repackage}</skip>
+						</configuration>
+                    </execution>
+                </executions>
 			</plugin>
 		</plugins>
 	</build>
+	
+	<profiles>
+		<profile>
+			<id>release</id>
+			<properties>
+                <skip.springboot.repackage>true</skip.springboot.repackage>
+            </properties>
+		</profile>
+	</profiles>
+	
 </project>
