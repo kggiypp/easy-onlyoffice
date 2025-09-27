@@ -11,6 +11,7 @@ import com.onlyoffice.manager.settings.SettingsManager;
 import com.onlyoffice.manager.url.DefaultUrlManager;
 import com.onlyoffice.manager.url.UrlManager;
 import com.onlyoffice.service.documenteditor.callback.CallbackService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -64,6 +65,7 @@ public class EasyOnlyofficeConfiguration {
     
     @Bean
     @ConditionalOnMissingBean
+    @ConditionalOnBean(FileDataHandler.class)
     public CallbackService callbackService(JwtManager jwtManager, SettingsManager settingsManager,
             FileDataHandler fileDataHandler, RequestManager requestManager) {
         
