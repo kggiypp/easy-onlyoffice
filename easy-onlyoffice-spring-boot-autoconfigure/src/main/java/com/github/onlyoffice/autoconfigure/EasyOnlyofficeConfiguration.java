@@ -2,6 +2,7 @@ package com.github.onlyoffice.autoconfigure;
 
 import com.github.onlyoffice.sdk.callback.FileDataHandler;
 import com.github.onlyoffice.sdk.callback.OpenApiCallbackService;
+import com.github.onlyoffice.sdk.request.OpenApiRequestManager;
 import com.github.onlyoffice.sdk.request.OpenApiRequestManagerImpl;
 import com.onlyoffice.manager.request.RequestManager;
 import com.onlyoffice.manager.security.DefaultJwtManager;
@@ -57,7 +58,7 @@ public class EasyOnlyofficeConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public RequestManager requestManager(UrlManager urlManager, JwtManager jwtManager,
+    public OpenApiRequestManager requestManager(UrlManager urlManager, JwtManager jwtManager,
             SettingsManager settingsManager) {
         
         return new OpenApiRequestManagerImpl(urlManager, jwtManager, settingsManager);
