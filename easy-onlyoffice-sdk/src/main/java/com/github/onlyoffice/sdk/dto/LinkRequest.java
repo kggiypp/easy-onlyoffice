@@ -1,5 +1,6 @@
 package com.github.onlyoffice.sdk.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.onlyoffice.model.common.RequestEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class LinkRequest implements RequestEntity {
     private String filename;
 
     @Override
+    @JsonIgnore
     public String getKey() {
         return null;
     }

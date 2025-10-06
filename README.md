@@ -31,7 +31,7 @@ onlyoffice文档服务器并不好直接与之交互使用，官方只提供了�
 <dependency>
   <groupId>io.github.kggiypp</groupId>
   <artifactId>easy-onlyoffice-spring-boot-starter</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.3-SNAPSHOT</version>
 </dependency>
 ```
 
