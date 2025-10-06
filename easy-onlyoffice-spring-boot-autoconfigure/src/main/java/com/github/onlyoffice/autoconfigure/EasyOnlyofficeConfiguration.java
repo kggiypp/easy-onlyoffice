@@ -70,7 +70,7 @@ public class EasyOnlyofficeConfiguration {
     public CallbackService callbackService(JwtManager jwtManager, SettingsManager settingsManager,
             FileDataHandler fileDataHandler, RequestManager requestManager) {
         
-        return new OpenApiCallbackService(jwtManager, settingsManager,fileDataHandler, requestManager);
+        return new OpenApiCallbackService(jwtManager, settingsManager, fileDataHandler, requestManager);
     }
     
 }
