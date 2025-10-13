@@ -6,7 +6,7 @@
 
     <groupId>io.github.kggiypp</groupId>
     <artifactId>easy-onlyoffice</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>pom</packaging>
     <name>easy-onlyoffice</name>
     <description>基于onlyoffice开源组件二次开发的一个简单易用的java门面端访问服务</description>
