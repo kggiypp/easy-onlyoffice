@@ -13,6 +13,7 @@
 	
 	<properties>
 		<spring-boot.version>2.5.1</spring-boot.version>
+		<apache.log4j.version>2.18.0</apache.log4j.version>
 		<skip.springboot.repackage>false</skip.springboot.repackage>
 	</properties>
 	
