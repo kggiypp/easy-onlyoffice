@@ -37,4 +37,4 @@ onlyoffice文档服务器并不好直接与之交互使用，官方只提供了�
 
 
 [onlyoffice官网地址]:https://www.onlyoffice.com
-[Java Spring example]:https://api.onlyoffice.com/docs/docs-api/samples/language-specific-examples/java-spring-examples
+[Java Spring example]:https://api.onlyoffice.com/docs/docs-api/samples/language-specific-examples/java-spring-example
