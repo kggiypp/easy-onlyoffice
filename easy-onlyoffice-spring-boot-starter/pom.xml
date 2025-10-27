@@ -7,7 +7,7 @@
     <parent>
         <groupId>io.github.kggiypp</groupId>
         <artifactId>easy-onlyoffice</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
     </parent>
     <artifactId>easy-onlyoffice-spring-boot-starter</artifactId>
     <name>easy-onlyoffice-spring-boot-starter</name>

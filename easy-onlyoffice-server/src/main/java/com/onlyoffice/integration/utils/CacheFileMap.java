@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * 文件信息缓存map
@@ -27,13 +28,21 @@ public class CacheFileMap extends LruCacheMap<String, FileInfo> implements Dispo
         super(maxSize);
         ShutdownHook.registerOne(this);
     }
-    
+
+    @Override
+    public FileInfo put(String key, FileInfo value) {
+        FileInfo oldFileInfo = super.put(key, value);
+        if (oldFileInfo != null) {
+            clearOneCacheFile(oldFileInfo);
+        }
+        return oldFileInfo;
+    }
+
     @Override
     protected boolean removeEldestEntry(Map.Entry<String, FileInfo> eldest) {
         boolean remove = super.removeEldestEntry(eldest);
         if (remove) {
-            String filePath = eldest.getValue().getFilePath();
-            deleteIfExists(Paths.get(filePath));
+           clearOneCacheFile(eldest.getValue());
         }
         return remove;
     }
@@ -66,7 +75,13 @@ public class CacheFileMap extends LruCacheMap<String, FileInfo> implements Dispo
         destroy();
     }
     
-    public void clearCacheFiles() {
+    private void clearOneCacheFile(FileInfo one) {
+        Optional.ofNullable(one.getFilePath())
+                .map(Paths::get)
+                .ifPresent(this::deleteIfExists);
+    }
+    
+    private void clearCacheFiles() {
         values().parallelStream()
                 .map(FileInfo::getFilePath)
                 .filter(StringUtils::hasText)
