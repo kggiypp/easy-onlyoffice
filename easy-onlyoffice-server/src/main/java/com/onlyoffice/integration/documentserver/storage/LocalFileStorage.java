@@ -420,15 +420,15 @@ public class LocalFileStorage implements FileStorageMutator, FileStoragePathBuil
         // get the path to the files with the specified name
         Path path = Paths.get(directory + fileName + "." + fileExtension);
 
+        String newFileName;
         for (int i = 1; Files.exists(path); i++) {  // run through all the files with the specified name
             // get a name of each file without extension and add an index to it
-            fileName = fileName + "(" + i + ")";
+            newFileName = fileName + "(" + i + ")";
 
             // create a new path for this file with the correct name and extension
-            path = Paths.get(directory + fileName + "." + fileExtension);
+            path = Paths.get(directory + newFileName + "." + fileExtension);
         }
 
-        path = Paths.get(directory + fileName + "." + fileExtension);
         return path;
     }
 
