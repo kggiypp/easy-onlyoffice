@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 /**
  * 枚举工具类
- * 
+ *
  * @author keguang
  */
 public class EnumUtil {
@@ -17,14 +17,15 @@ public class EnumUtil {
      * @return
      */
     public static <T extends Enum<T>> boolean isOneOfTheMutiple(Enum<T> one, Enum<T>... multiple) {
+        if (one == null) {
+            return false;
+        }
         int oneBit = 1 << one.ordinal();
-        
-        int aggreateBit = Stream.of(multiple)
+        int aggregateBits = Stream.of(multiple)
                 .map(Enum::ordinal)
-                .reduce((left, right) -> 1 << left | 1 << right)
-                .orElse(0);
-        
-        return (oneBit & aggreateBit) != 0;
+                .reduce(0, (left, right) -> left | 1 << right);
+
+        return (oneBit & aggregateBits) != 0;
     }
-    
+
 }
