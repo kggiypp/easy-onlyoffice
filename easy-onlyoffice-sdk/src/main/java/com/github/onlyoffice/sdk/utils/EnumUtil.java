@@ -20,8 +20,8 @@ public class EnumUtil {
         if (one == null) {
             return false;
         }
-        int oneBit = 1 << one.ordinal();
-        int aggregateBits = Stream.of(multiple)
+        long oneBit = 1 << one.ordinal();
+        long aggregateBits = Stream.of(multiple)
                 .map(Enum::ordinal)
                 .reduce(0, (left, right) -> left | 1 << right);
 
