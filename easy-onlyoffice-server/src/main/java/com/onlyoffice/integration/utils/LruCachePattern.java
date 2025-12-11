@@ -10,9 +10,10 @@ import java.util.regex.Pattern;
 
 /**
  * 缓存最近使用到的正则Pattern对象使其可复用，减少每次重新编译正则串的性能开销
- * 
+ *
  * @author keguang
  */
+@SuppressWarnings("unused")
 public class LruCachePattern {
 
     /**
@@ -34,7 +35,7 @@ public class LruCachePattern {
      * 锁
      */
     private static ReentrantLock lock = new ReentrantLock();
-    
+
     /**
      * 获取编译过的缓存Pattern，如果不存在则编译
      * @param regex 正则表达式
@@ -43,7 +44,7 @@ public class LruCachePattern {
     public static Pattern getCachedPattern(@NonNull String regex) {
         return getCachedPattern(regex, 0);
     }
-    
+
     /**
      * 获取编译过的缓存Pattern，如果不存在则编译
      * @param regex 正则表达式
@@ -51,11 +52,12 @@ public class LruCachePattern {
      * @return 编译后的Pattern
      */
     public static Pattern getCachedPattern(@NonNull String regex, int flags) {
+        String key = regex + '_' + flags;
         try {
-            while (!currentlyInAccessKeySet.add(regex)) {
+            while (!currentlyInAccessKeySet.add(key)) {
                 Thread.yield();
             }
-            return cachedMap.computeIfAbsent(regex, k -> {
+            return cachedMap.computeIfAbsent(key, k -> {
                 Pattern pattern = Pattern.compile(regex, flags);
                 lock.lock();
                 return pattern;
@@ -64,8 +66,8 @@ public class LruCachePattern {
             if (lock.isLocked()) {
                 lock.unlock();
             }
-            currentlyInAccessKeySet.remove(regex);
+            currentlyInAccessKeySet.remove(key);
         }
     }
-    
+
 }
